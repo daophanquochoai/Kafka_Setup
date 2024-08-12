@@ -1,4 +1,4 @@
-package com.doctorhoai.kafka_tech.config;
+package com.doctorhoai.kafka_tech.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +16,7 @@ public class KafkaMessagePublisher {
     private final KafkaTemplate<String, Object> kafkaTemplate;
 
     public void sendMessageToTopic( String message ){
-        CompletableFuture<SendResult<String,Object>> future =  kafkaTemplate.send("doctorhoau", message);
+        CompletableFuture<SendResult<String,Object>> future =  kafkaTemplate.send("doctorhoai1", message);
         future.whenComplete( ( result, throwable) -> {
             if( throwable == null ){
                 log.info("Sent message = [ {} ] with offset = [ {} ] , partitions = [ {} ]", message, result.getRecordMetadata().offset(), result.getRecordMetadata().partition());

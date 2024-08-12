@@ -1,6 +1,6 @@
 package com.doctorhoai.kafka_tech.controller;
 
-import com.doctorhoai.kafka_tech.config.KafkaMessagePublisher;
+import com.doctorhoai.kafka_tech.service.KafkaMessagePublisher;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -22,7 +22,9 @@ public class EventController {
             @PathVariable String message
     ){
         try{
-            publisher.sendMessageToTopic(message);
+            for( int i = 1 ; i <= 10000 ; i++ ){
+                publisher.sendMessageToTopic(message + " : " + i);
+            }
             return ResponseEntity.ok("Message pulished successful");
         }catch (Exception ex ){
             log.error("Message pulished failure");
